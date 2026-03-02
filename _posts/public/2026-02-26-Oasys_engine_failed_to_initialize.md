@@ -1,6 +1,6 @@
 ---
 title: Oasys engine failed to initialize during Catapult synthesis
-author: Rhea-Lee
+author: rhea
 date: 2026-02-25 18:00:00 +0900
 categories: [troubleshooting]
 tags: [catapult, troubleshooting]

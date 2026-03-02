@@ -1,9 +1,9 @@
 ---
 title: Incorrect home mount after Linux home migration
-author: Rhea-Lee
+author: rhea
 date: 2026-02-25 16:00:00 +0900
 categories: [troubleshooting]
-tags: [Linux, troubleshooting]
+tags: [linux, troubleshooting]
 published: true
 ---
 
