@@ -19,7 +19,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 ```
 
 ### **Cause**
-Home을 migrate했을 당시 machine00에 `umount`작업을 하지 않았었다.
+home을 migrate했을 당시 machine00에 `umount`작업을 하지 않았었다.
 
 
 ### **Solution**
