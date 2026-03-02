@@ -45,8 +45,6 @@ ls: cannot access '/usr/lib64/libnsl.so.1': No such file or directory
 역시나 machine00에는 있는 library가 machine77에는 없었다.
 
 ### **Solution**
-
-
 ```bash
 [me@machine77 /home/me/work/<project_path>] sudo dnf install libnsl
 ```
@@ -72,7 +70,7 @@ libnsl은 network service library라고 한다. 이 library가 없어 오류가 
 <mgc_home_dir>/pkgs/cds_slec/rls/platform/common/pa/config_auto_physical/oasys_run.tcl
 <mgc_home_dir>/shared/pdfdocs/images/oasys_synth_script.png
 ```
-> <span style="color:violet"> **note** </span>  
+> <span style="color:lightgreen"> **note** </span>  
 > `$MGC_HOME`은 Mentor Graphics Corporation(MGC)(catapult 만든 회사)의 핵심 툴들이 설치된 최상위 폴더 경로를 가리키는 환경 변수
 
 Catapult 설치 폴더 안에서 이름이 'oasys'로 시작하는 모든 file을 찾아보았다.

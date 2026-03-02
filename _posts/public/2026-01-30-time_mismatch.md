@@ -1,5 +1,5 @@
 ---
-title: time mismatch in new machine
+title: Time mismatch in new machine
 author: rhea
 date: 2026-01-30 20:00:00 +0900
 categories: [troubleshooting]

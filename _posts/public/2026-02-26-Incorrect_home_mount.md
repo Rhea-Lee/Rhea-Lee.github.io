@@ -8,7 +8,6 @@ published: true
 ---
 
 ### **Problem**
-
 machine77에 나의 home이 있다. 그러나 machine77에서 이전 머신인 machine00에 SSH 접속하면, `/home/me` dir이 machine77의 home이 아니라 예전 machine00 home이었다.
 
 이전 머신 상태였다.
@@ -55,6 +54,7 @@ umount: /home/me: target is busy.
          the device is found by lsof(8) or fuser(1))
 ```
 다시 `sudo umount /home/me` 명령어를 입력하였지만 같은 결과가 나왔다. 아마 프로세스가 죽는 데 시간이 걸렸던 것으로 추정된다.
+
 ```bash
 [me@machine00 /] sudo umount -fl /home/me
 ```
