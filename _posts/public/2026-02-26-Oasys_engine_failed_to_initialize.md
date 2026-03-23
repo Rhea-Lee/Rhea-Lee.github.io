@@ -8,7 +8,7 @@ published: true
 ---
 
 ### **Problem**
-catapult 합성 시 다음과 같이 oasys engine initialize가 fail되어 Error log를 띄우는 현상이 있었다.
+catapult RTL 합성 시 다음과 같이 Oasys engine initialize가 fail되어 error log를 띄우는 현상이 있었다.
 합성에는 지장이 없었다.
 
 ```bash
@@ -45,43 +45,33 @@ ls: cannot access '/usr/lib64/libnsl.so.1': No such file or directory
 역시나 machine00에는 있는 library가 machine77에는 없었다.
 
 ### **Solution**
+libnsl은 network service library라고 한다. 이 library가 없어 오류가 발생하곤 한다는 정보를 듣고 설치하였다.
+
 ```bash
 [me@machine77 /home/me/work/<project_path>] sudo dnf install libnsl
 ```
-libnsl은 network service library라고 한다. 이 library가 없어 오류가 발생하곤 한다는 정보를 듣고 설치하였다.
 
 그러나 여전히 error log가 존재한다.
 
-```bash
-[me@machine77 /home/me/work/<project_path>] find $MGC_HOME -name "oasys*" -type f
-<mgc_home_dir>/pkgs/cds_oasys/rls/bin/Linux-x86_64-O/oasys
-<mgc_home_dir>/pkgs/cds_oasys/rls/bin/oasys
-<mgc_home_dir>/pkgs/cds_oasys/rls/lib/share/oasysmxdb/bin/oasysMxdb
-<mgc_home_dir>/pkgs/cds_oasys/rls/lib/share/tcl/oasys.odb
-<mgc_home_dir>/pkgs/cds_ppro/oasys/lib/share/oasysmxdb/bin/oasysMxdb
-<mgc_home_dir>/pkgs/cds_ppro/oasys/lib/share/onespin/oasys_utils_intermediate_flow.tcl
-<mgc_home_dir>/pkgs/cds_ppro/oasys/lib/share/onespin/oasys_utils_newFlow.tcl
-<mgc_home_dir>/pkgs/cds_ppro/oasys/lib/share/tcl/oasys.odb
-<mgc_home_dir>/pkgs/cds_ppro/oasys/bin/Linux-x86_64-O/oasys
-<mgc_home_dir>/pkgs/cds_ppro/oasys/bin/Linux-x86_64-O/oasysEncrypt
-<mgc_home_dir>/pkgs/cds_ppro/oasys/bin/Linux-x86_64-O/oasysGui
-<mgc_home_dir>/pkgs/cds_ppro/oasys/bin/oasys
-<mgc_home_dir>/pkgs/cds_ppro/powerpro/platform/common/pa/config_auto_physical/oasys_run.tcl
-<mgc_home_dir>/pkgs/cds_slec/rls/platform/common/pa/config_auto_physical/oasys_run.tcl
-<mgc_home_dir>/shared/pdfdocs/images/oasys_synth_script.png
-```
-> <span style="color:lightgreen"> **note** </span>  
-> `$MGC_HOME`은 Mentor Graphics Corporation(MGC)(catapult 만든 회사)의 핵심 툴들이 설치된 최상위 폴더 경로를 가리키는 환경 변수
-
 Catapult 설치 폴더 안에서 이름이 'oasys'로 시작하는 모든 file을 찾아보았다.
+
 ```bash
-[me@machine77 /home/me/work/<project_path>] ldd <mgc_home_dir>/pkgs/cds_oasys/rls/bin/Linux-x86_64-O/oasys | grep "not found"
+[me@machine77 /home/me/work/<project_path>] find $CTPT_HOME -name "oasys*" -type f
+<ctpt_home_dir>/.../oasys
+...
+```
+
+Oasys binary file(실제 실행 파일)에 대해 의존성을 체크했다.
+
+```bash
+[me@machine77 /home/me/work/<project_path>] ldd <ctpt_home_dir>/.../oasys | grep "not found"
 	libncurses.so.5 => not found
 ```
-oasys binary file(실제 실행 파일)에 대해 의존성을 체크했다.
+
+위 file이 포함된 package를 설치하였다.
+
 ```bash
 [me@machine77 /home/me/work/<project_path>] sudo dnf install ncurses-compat-libs
 ```
-위 file이 포함된 package를 설치하였다.
 
-이후 다시 catapult 합성해보니 error가 사라졌다!
+이후 다시 Catapult 합성해보니 error가 사라졌다!
