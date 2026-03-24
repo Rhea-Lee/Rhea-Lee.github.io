@@ -39,21 +39,21 @@ bash       4656 me  cwd    DIR   8,16      4096 96608292 /home/me/work/<project_
 gnome-ses  9588 me  cwd    DIR   8,16      4096 86638593 /home/me
 ...
 ```
-내가 이전에 띄워놓은 GUI 환경(GNOME, VNC, XRDP)과 시뮬레이션 프로세스들을 확인할 수 있었다.
+내가 이전에 띄워놓은 GUI 환경(GNOME, VNC, XRDP)과 simulation process들을 확인할 수 있었다.
 
 ```bash
 sudo killall -u me
 Connection to machine00 closed by remote host.
 Connection to machine00 closed.
 ```
-`/home/me`를 사용 중인 모든 프로그램을 죽였다. 현재 접속 중인 ssh 세션도 끊겼다.
+`/home/me`를 사용 중인 모든 process를 죽였다. 현재 접속 중인 SSH session도 끊겼다.
 ```bash
 [me@machine00 /] sudo umount /home/me
 umount: /home/me: target is busy.
         (In some cases useful info about processes that use
          the device is found by lsof(8) or fuser(1))
 ```
-다시 `sudo umount /home/me` 명령어를 입력하였지만 같은 결과가 나왔다. 아마 프로세스가 죽는 데 시간이 걸렸던 것으로 추정된다.
+다시 `sudo umount /home/me` command를 입력하였지만 같은 결과가 나왔다. 아마 process가 죽는 데 시간이 걸렸던 것으로 추정된다.
 
 ```bash
 [me@machine00 /] sudo umount -fl /home/me
