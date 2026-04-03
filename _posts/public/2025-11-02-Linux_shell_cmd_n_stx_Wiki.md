@@ -1,5 +1,5 @@
 ---
-title: Linux shell cmd & stx Wiki
+title: Linux shell command & syntax Wiki
 author: rhea
 date: 2025-11-23 17:29:00 +0900
 categories: [linux]
@@ -50,6 +50,7 @@ published: true
 
 
 #### `top`
+**Display Linux Processes**
 - Default external command
 - Usage examples
   ```bash
@@ -69,6 +70,7 @@ published: true
   ```
 
 #### `htop`
+***<u>H</u>isham's <u>TOP</u>***
 - Non-default external command 
 - Usage examples
   ```bash
@@ -88,12 +90,12 @@ published: true
 <br>
 
 ### **`kill`**, **`pkill`**
-process terminate command
-
+**Process terminate command**
 
 #### `kill`
+**Kill process by PID**
 - Shell Built-in & Default external command
-- PID(프로세스 ID)를 직접 지정해서 termination
+- PID(Process ID)를 직접 지정해서 termination
 - Usage examples
 - ex.
   ```bash
@@ -110,6 +112,7 @@ process terminate command
   ```
 
 #### `pkill`
+***Process KILL*** by name
 - Non-default external command
 - PID를 몰라도 process 이름만으로 일괄 termination
 - Usage examples
@@ -124,8 +127,10 @@ process terminate command
 <br>
 
 ### **`echo`**
+**Echo string**
 - Shell Built-in command
 - 입력한 String이나 Shell Variables를 Terminal 화면에 Display
+- <span style="color:DeepSkyblue"> **func eq!** </span> C의 `printf`
 - Usage examples
   ```bash
   # Display a specific message or variable
@@ -136,6 +141,7 @@ process terminate command
 <br>
 
 ### **`rm`**
+***<u>R</u>e<u>M</u>ove***
 - Default external command
 - Files나 Directories를 system에서 Delete
 - <span style="color:tomato"> **Caution!** </span> 삭제된 데이터는 Trash Can으로 이동하지 않고 바로 Unlink되므로 복구가 어려움
@@ -157,7 +163,7 @@ process terminate command
 <br>
 
 ### **`mkdir`**
-Make Directory
+***<u>M</u>a<u>K</u>e <u>DIR</u>ectory***
 - Default external command
 - 새로운 Empty Directory를 Create
 - Usage examples
@@ -176,10 +182,10 @@ Make Directory
 <br>
 
 ### **`ln`, `ln -s`**
-Link management commands
+**Link management commands**
 
 #### **`ln`**
-Hard Link
+**Hard Link**
 - Default external command
 - Target File과 동일한 Inode Number를 공유하는 새로운 이름을 Create
 - Data Block을 직접 가리키는 포인터를 하나 더 생성 (Reference Count 증가)
@@ -201,7 +207,7 @@ Hard Link
   ```
 
 #### **`ln -s`**
-Symbolic Link / Soft Link
+**Symbolic Link / Soft Link**
 - Default external command
 - Target File의 Path를 담고 있는 별도의 새로운 파일을 Create
 - Windows의 Shortcut(바로가기)과 유사하며, 독자적인 Inode를 가짐
@@ -219,7 +225,7 @@ Symbolic Link / Soft Link
 <br>
 
 ### **`rsync`**
-Remote Sync
+***<u>R</u>emote <u>SYNC</u>***
 - Default external command (Most Linux distributions)
 - Local이나 Remote Host 간에 Files 및 Directories를 효율적으로 Synchronize
 - Delta Transfer Algorithm으로 변경된 부분만 찾아내어 전송하므로 Network Bandwidth를 절약
@@ -245,6 +251,32 @@ Remote Sync
   # -n (Dry run): Perform a trial run without making any actual changes
   rsync -avzn --progress /src/ /dest/
   ```
+
+<br>
+
+### **`source`**
+**Execute file in the current shell**
+- Built-in shell command
+- script 파일을 실행할 때 새로운 Subshell을 생성하지 않고, 현재 Shell 세션 내에서 직접 실행
+- script 내부에서 정의된 변수, 함수, 환경 설정이 현재 세션에 즉시 반영됨 (영구 적용을 위해 .bashrc 수정 후 자주 사용)
+- command 대신 dot(.) 기호를 사용하여 동일하게 수행 가능 (POSIX 표준)
+- Usage examples
+  ```bash
+  # Load and reflect configurations, environments, or functions immediately
+  # Import script content into the current shell context
+  source ./my_scripts/useful_functions.sh
+
+  # Alternative syntax (Dot operator)
+  # Performs the same action using '.' (Note: A space is required after the dot)
+  . ~/.profile
+  ```
+- <span style="color:PaleVioletRed"> **Pitfall!** </span> `./test.sh` vs `. ./test.sh`
+
+  | Command | `./test.sh` (일반 실행) | `source ./test.sh` or `. ./test.sh` |
+  | Proc scope | 새로운 Subshell(자식 쉘)을 띄워서 실행 | Current Shell에서 직접 실행 |
+  | Env Var |	script 안에서 export 해도 현재 terminal엔 적용 X | script 안 export 등이 현재 terminal에 남음 |
+  | Permission | 실행 권한(x)이 반드시 있어야 함 | 실행 권한 없어도 읽기 권한만 있으면 가능 |
+  | Post-Exec | Subshell이 닫히면서 작업 내용(변수 등)이 증발 | 현재 terminal 환경이 script 내용대로 변경됨 |
 
 <br>
 

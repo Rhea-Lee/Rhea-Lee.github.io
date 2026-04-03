@@ -1,5 +1,5 @@
 ---
-title: tcl syntax Wiki
+title: Tcl syntax Wiki
 author: rhea
 date: 2025-11-04 16:30:00 +0900
 categories: [tcl]
@@ -41,4 +41,5 @@ published: true
   # Assign the execution result to a variable (if return is used in the script)
   set setup_status [source "project_setup.tcl"]
   ```
-- <span style="color:deepskyblue">**func eq!**</span> Lua의 `dofile`
+- <span style="color:DeepSkyblue"> **func eq!** </span> Lua의 `dofile`
+- <span style="color:LightGreen"> **func like!** </span> Linux shell의 `source`
