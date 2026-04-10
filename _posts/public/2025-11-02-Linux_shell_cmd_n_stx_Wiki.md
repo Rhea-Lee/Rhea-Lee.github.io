@@ -32,7 +32,7 @@ published: true
 
 2. Process Sorting & Searching
     - Sort : CPU(P), Memory(M), Runtime 순으로 나열하여 Resource Hog(과점유 프로세스) Identify
-    - Filter : 특정 User(nathan)나 Program name(vsim)으로 Search 및 Filtering
+    - Filter : 특정 User나 Program name으로 Search 및 Filtering
 
 3. Process Management (Kill & Priority)
     - Kill : Signal을 전송하여 Issue가 발생한 Process 즉시 Termination
